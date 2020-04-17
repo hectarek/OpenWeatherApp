@@ -1,0 +1,45 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.weather-by-zip,
+.weather-by-city,
+.weather-by-location,
+.weather-container,
+.three-day-forecast,
+.three-day-forecast div 
+.high-of, .low-of, .days {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.currently, .current-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.three-day-forecast {
+    flex-direction: row;
+}
+
+.three-day-forecast div {
+    margin: 8px;
+    padding: 8px
+}
+
+.three-day-forecast div div {
+    display: flex;
+}
