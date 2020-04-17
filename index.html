@@ -3,9 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+     <!-- Awesome Fonts -->
+     <script src="https://kit.fontawesome.com/1c43bbe449.js" crossorigin="anonymous"></script> 
     <title>Hector's Weather App</title>
+    
 </head>
 <body>
     
+    <div class="weather-by-zip">
+        <h1>Please enter your Zip code to get weather</h1>
+        <input type="text" name="zip" id="zip">
+        <button type="submit" id="zipButton">Find</button>
+    </div>
+
+    <div class="weather-by-city">
+        <h1>Please enter city and state</h1>
+        <label for="city"> City: </label>
+            <input type="text" name="city" id="city">
+        <label for="state"></label>
+            <input type="text" name="state" id="state">
+        <button type="submit" id="cityStateButton">Find</button>
+    </div>
+
+    <div class="weather-by-location">
+        <h1>Or just let me figure it our for you</h1>
+        <button type="submit" id="geoLocateButton">Find Me</button>
+    </div>
+
+    <div class="weather-container">
+        
+        <div class="currently">
+            <div class="current-time">
+                <h1 id="current-time-header"></h1>
+            </div>
+            <div class="current-temp">
+                <h1 id="current-temp-degrees"></h1>
+            </div>
+            <div class="feelslike-temp">
+                <h2 id="feelslike-temp-degrees"></h2>
+            </div>
+        </div>
+
+        <div class="three-day-forecast">
+
+            <div class="day-one">
+                <h2>Day 2</h2>   
+                <h3> Sunny</h3>
+                <i class="fas fa-sun"></i>
+                <div class="high-of">
+                    <h3>High</h3>
+                    <h2>34</h2>
+                </div>
+                <div class="low-of">
+                    <h3>Low</h3>
+                    <h2>34</h2>
+                </div>
+                <h3>0%</h3>
+            </div>
+
+            <div class="day-two">
+               <h2>Day 3</h2>   
+                <h3>Rainy</h3>
+                <i class="fas fa-cloud-rain"></i>
+                <div class="high-of">
+                    <h3>High</h3>
+                    <h2>34</h2>
+                </div>
+                <div class="low-of">
+                    <h3>Low</h3>
+                    <h2>34</h2>
+                </div>
+                <h3>0%</h3>
+            </div>
+
+            <div class="day-three">
+                <h2>Tomorrow</h2>   
+                <h3>Cloudy</h3>
+                <i class="fas fa-cloud"></i>
+                <div class="high-of">
+                    <h3>High</h3>
+                    <h2>34</h2>
+                </div>
+                <div class="low-of">
+                    <h3>Low</h3>
+                    <h2>34</h2>
+                </div>
+                <h3>0%</h3>
+            </div>
+
+        </div>
+    </div>
+   
+    <!-- Moments CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+    <!-- My Script -->
+    <script src="script.js"></script>
 </body>
 </html>
+
+
+

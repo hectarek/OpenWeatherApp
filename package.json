@@ -1,0 +1,24 @@
+{
+  "name": "openweatherapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "test",
+    "start": "node script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hectarek/OpenWeatherApp.git"
+  },
+  "author": "Hector Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hectarek/OpenWeatherApp/issues"
+  },
+  "homepage": "https://github.com/hectarek/OpenWeatherApp#readme",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.28"
+  }
+}
