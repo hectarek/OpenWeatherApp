@@ -33,6 +33,9 @@ let day4day = document.getElementById('day-four-day');
 let currently = document.getElementById('current-temp-degrees')
 let feelsLike = document.getElementById('feelslike-temp-degrees')
 
+//humidity
+let humidity = document.getElementById('humidity')
+
 //temps for three day forecast
 let day2HightTemp = document.getElementById('day-two-high-temp')
 let day2LowTemp = document.getElementById('day-two-low-temp')
@@ -91,6 +94,7 @@ zipButton.addEventListener('click', () => {
         currentCondition.textContent = data.weather[0].description
         currentLocation.textContent = data.name;
         currentConditionIcon.className = weatherIconsComparison[data.weather[0].main]
+        humidity.textContent = data.main.humidity + '%'
 
         let lat = data.coord.lat
         let long = data.coord.lon
@@ -138,21 +142,22 @@ zipButton.addEventListener('click', () => {
   
 })
   
+
 cityStateButton.addEventListener('click', () => {
     
     let cityInput = city.value.trim();
     let stateInput = state.value.trim();
 
-    const api2 = `https://www.zipcodeapi.com/rest/NoPzgbEGbMfKF0CGk07ggG52lXZ8t2NNfS2DMHMEYfdOfHEUxh8UzGH0JKqO01ZM/city-zips.json/${cityInput}/${stateInput}`
+    const proxy = "https://cors-anywhere.herokuapp.com/"
 
+    const api = `${proxy}https://www.zipcodeapi.com/rest/NoPzgbEGbMfKF0CGk07ggG52lXZ8t2NNfS2DMHMEYfdOfHEUxh8UzGH0JKqO01ZM/city-zips.json/${cityInput}/${stateInput}`
 
-    const api = `https://www.zipcodeapi.com/rest/NoPzgbEGbMfKF0CGk07ggG52lXZ8t2NNfS2DMHMEYfdOfHEUxh8UzGH0JKqO01ZM/city-zips.json/Charlotte/NC`
-    const api3 = `https://www.zipcodeapi.com/rest/YQ2EQV4TW3r1dF3h4FtX13kVLyr4ffcfRisIf1bOLqjxdjD2pWiWcCmrZtU8axF3/city-zips.json/Charlotte/NC`
-
-    
-    fetch(api3, {meathod: 'GET'})
+    fetch(api)
+    .then(response => {
+        return response.json()
+    })
     .then(data => {
-        console.log(data)
+        console.log(data.zip_codes[0])
     })
 
 })
