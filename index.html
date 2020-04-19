@@ -4,53 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-     <!-- Awesome Fonts -->
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <!-- Awesome Fonts -->
      <script src="https://kit.fontawesome.com/1c43bbe449.js" crossorigin="anonymous"></script> 
     <title>Hector's Weather App</title>
     
 </head>
 <body>
     
-    <div class="weather-by-zip">
-        <h1>Please enter your Zip code to get weather</h1>
-        <div>
-            <input type="text" name="zip" id="zip">
+    <div class="input-container">
+
+        <div class="weather-by-zip">
+            <h1>Enter Zip code to get Weather</h1>
+            <div class="zip">
+                <label for="zip">Zip:</label>
+                <input type="text" name="zip" id="zip">
+            </div> 
             <button type="submit" id="zipButton">Find</button>
-        </div> 
-    </div>
 
-    <div class="weather-by-city">
-        <h1>Please enter city and state</h1>
-
-        <div>
-            <label for="city"> City: </label>
-            <input type="text" name="city" id="city">
-        <label for="state"></label>
-            <input type="text" name="state" id="state">
-        <button type="submit" id="cityStateButton">Find</button>
         </div>
-        
-    </div>
+    
+        <div class="weather-by-city">
+            <h1>Enter City and State for Weather</h1>
+    
+            <div class="city-state">
+                <div class="city">
+                    <label for="city"> City: </label>
+                    <input type="text" name="city" id="city">
+                </div>
+                <div class="state">
+                    <label for="state">State:</label>
+                    <input type="text" name="state" id="state">
+                </div>
+            
+            </div>
+            
+            <button type="submit" id="cityStateButton">Find</button>
 
-    <div class="weather-by-location">
-        <h1>Or just let me figure it our for you</h1>
-        <button type="submit" id="geoLocateButton">Find Me</button>
+        </div>
+
+        <div class="weather-by-location">
+            <h1>Click for Weather based on your Location</h1>
+            <button type="submit" id="geoLocateButton">Find Me</button>
+        </div>
+
     </div>
 
     <div class="weather-container">
         
+        <h1>Currently</h1>
+
         <div class="currently">
 
             <div class="pane-one">
                 <div class="current-info">
-                    <h1 id='location-current'>city, state, zip</h1>
+                    <h1 id='current-location' style="font-size: 48px;" >city</h1>
                     <h2 id="current-time-header">time</h2>
                     <h3 id="current-condition">condition</h3>
                 </div>
-                <div class="current-temp">
-                    <i class="fas fa-sun fa-8x"></i>
-                    <h1 id="current-temp-degrees">temp</h1>
+
+                <div class="temp-container">
+                    <div class="current-temp">
+                        <i id='current-condition-icon' class="fas fa-sun fa-6x"></i>
+                        <h2 id="current-temp-degrees" style="font-size: 48px;">TP</h2>
+                    </div>
+                    <div class="degrees-buttons">
+                        <h2 id="F-degrees-button" style="margin: 6px;">°F</h2>
+                        <h2>|</h2>
+                        <h2 id="C-degrees-button">°C</h2>
+                    </div>
                 </div>
+                
                 
             </div>
 
@@ -67,61 +92,65 @@
 
         </div>
 
+        <hr>   
+
+        <h1 style="margin-bottom: -12px;">3-Day Forecast</h1>
+
         <div class="three-day-forecast">
 
-            <div class="days">
-                <h2>Day 2</h2>   
+            <div class="day-of-week">
+
+                <h2 id="day-two-day">Day 2</h2>   
                 <h3 id="day-two-condition">condition</h3>
-                <i class="fas fa-sun fa-3x"></i>
+                <i id='day-two-condition-icon' class="fas fa-sun fa-3x"></i>
                 <div>
                     <div class="high-of">
                         <h3 >High</h3>
-                        <h2 id="day-two-high-temp">temp</h2>
+                        <h3 id="day-two-high-temp">temp</h3>
                     </div>
                     <div class="low-of">
                         <h3>Low</h3>
-                        <h2 id="day-two-low-temp">temp</h2>
+                        <h3 id="day-two-low-temp">temp</h3>
                     </div>
                 </div>
                 
-                <h3>0%</h3>
             </div>
 
-            <div class="days">
-               <h2>Day 3</h2>   
+            <div class="day-of-week">
+
+               <h2 id="day-three-day">Day 3</h2>   
                 <h3 id="day-three-condition">condition</h3>
-                <i class="fas fa-cloud-rain fa-3x"></i>
+                <i id='day-three-condition-icon' class="fas fa-cloud-rain fa-3x"></i>
 
                 <div>
                     <div class="high-of">
                         <h3>High</h3>
-                        <h2 id="day-three-high-temp">temp</h2>
+                        <h3 id="day-three-high-temp">temp</h3>
                     </div>
                     <div class="low-of">
                         <h3>Low</h3>
-                        <h2 id="day-three-low-temp">temp</h2>
+                        <h3 id="day-three-low-temp">temp</h3>
                     </div>
                 </div>
                 
-                <h3>0%</h3>
             </div>
 
-            <div class="days">
-                <h2>Day 4</h2>   
+            <div class="day-of-week">
+
+                <h2 id="day-four-day">Day 4</h2>   
                 <h3 id="day-four-condition">condition</h3>
-                <i class="fas fa-cloud fa-3x"></i>
+                <i id='day-four-condition-icon' class="fas fa-cloud fa-3x"></i>
                 <div>
                     <div class="high-of">
                         <h3>High</h3>
-                        <h2 id="day-four-high-temp">temp</h2>
+                        <h3 id="day-four-high-temp">temp</h3>
                     </div>
                     <div class="low-of">
                         <h3>Low</h3>
-                        <h2 id="day-four-low-temp">temp</h2>
+                        <h3 id="day-four-low-temp">temp</h3>
                     </div>
                 </div>
      
-                <h3>0%</h3>
             </div>
 
         </div>

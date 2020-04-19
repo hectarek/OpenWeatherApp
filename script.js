@@ -23,6 +23,12 @@ let state = document.getElementById('state');
 //Time Heading
 let currentTime = document.getElementById('current-time-header')
 
+//Days 
+let day2day = document.getElementById('day-two-day');
+let day3day = document.getElementById('day-three-day');
+let day4day = document.getElementById('day-four-day');
+
+
 //headings that turn into temps
 let currently = document.getElementById('current-temp-degrees')
 let feelsLike = document.getElementById('feelslike-temp-degrees')
@@ -36,7 +42,7 @@ let day4HighTemp = document.getElementById('day-four-high-temp')
 let day4LowTemp = document.getElementById('day-four-low-temp')
 
 //Location 
-let currentLocation = document.getElementById('location-current');
+let currentLocation = document.getElementById('current-location');
 
 //conditions for 3 days 
 let currentCondition = document.getElementById('current-condition')
@@ -44,12 +50,33 @@ let day2Condition = document.getElementById('day-two-condition')
 let day3Condition = document.getElementById('day-three-condition')
 let day4Condition = document.getElementById('day-four-condition')
 
+//Icons
+let currentConditionIcon = document.getElementById('current-condition-icon')
+let day2ConditionIcon = document.getElementById('day-two-condition-icon')
+let day3ConditionIcon = document.getElementById('day-three-condition-icon')
+let day4ConditionIcon = document.getElementById('day-four-condition-icon')
+
+//Icon Comparison Chart 
+const weatherIconsComparison = {
+    "Clear": 'fas fa-sun fa-3x',
+    "Clouds": 'fas fa-cloud fa-3x',
+    "Drizzle": 'fas fa-cloud-rain fa-3x',
+    "Rain": 'fas fa-cloud-showers-heavy fa-3x',
+    "Thunderstorm": 'fas fa-bolt fa-3x',
+    "Snow": 'fas fa-snowflake fa-3x',
+    "Mist": 'fas fa-smog fa-3x'
+}
+
+//Degrees Button changers
+let fDegreesButton = document.getElementById('F-degrees-button')
+let cDegreesButton = document.getElementById('C-degrees-button')
+
 
 zipButton.addEventListener('click', () => {
 
     let input = zip.value.trim();
 
-    const api = `http://api.openweathermap.org/data/2.5/weather?zip=${input},us&appid=554b954c4498dd6dcea9fa6a913c29b3`
+    const api = `https://api.openweathermap.org/data/2.5/weather?zip=${input}&appid=554b954c4498dd6dcea9fa6a913c29b3`
 
     //fetch weather data from api
     fetch(api)
@@ -61,8 +88,9 @@ zipButton.addEventListener('click', () => {
         //Change city, condition and temps for current
         currently.textContent = degreesKtoF(data.main.temp) + '°F' ;
         feelsLike.textContent = degreesKtoF(data.main.feels_like) + '°F';
-        currentCondition.textContent = data.weather.description
+        currentCondition.textContent = data.weather[0].description
         currentLocation.textContent = data.name;
+        currentConditionIcon.className = weatherIconsComparison[data.weather[0].main]
 
         let lat = data.coord.lat
         let long = data.coord.lon
@@ -78,8 +106,11 @@ zipButton.addEventListener('click', () => {
 
             let timeZone = data.timezone
 
-            //Current Time from timezone
-            currentTime.textContent = moment().tz(timeZone).format('hh:mm a')
+            //Time from timezone and add days
+            currentTime.textContent = ( moment().tz(timeZone).format('dddd') + ', ' + moment().tz(timeZone).format('hh:mm a') )
+            day2day.textContent = moment().tz(timeZone).add(1, 'd').format('dddd')
+            day3day.textContent = moment().tz(timeZone).add(2, 'd').format('dddd')
+            day4day.textContent = moment().tz(timeZone).add(3, 'd').format('dddd')
 
 
             //Change temps for forecast
@@ -90,15 +121,20 @@ zipButton.addEventListener('click', () => {
             day4HighTemp.textContent = degreesKtoF(data.daily[3].temp.max) + '°F';
             day4LowTemp.textContent = degreesKtoF(data.daily[3].temp.min) + '°F';
     
+            //display the condition for each day
             day2Condition.textContent = data.daily[1].weather[0].description
             day3Condition.textContent = data.daily[2].weather[0].description
             day4Condition.textContent = data.daily[3].weather[0].description
+
+            //Change icons for the different weather
+            day2ConditionIcon.className = weatherIconsComparison[data.daily[1].weather[0].main]
+            day3ConditionIcon.className = weatherIconsComparison[data.daily[2].weather[0].main]
+            day4ConditionIcon.className = weatherIconsComparison[data.daily[3].weather[0].main]
+            
+
         })
 
     })
-
-    
-
   
 })
   
@@ -109,35 +145,39 @@ cityStateButton.addEventListener('click', () => {
 
     const api2 = `https://www.zipcodeapi.com/rest/NoPzgbEGbMfKF0CGk07ggG52lXZ8t2NNfS2DMHMEYfdOfHEUxh8UzGH0JKqO01ZM/city-zips.json/${cityInput}/${stateInput}`
 
-    fetch(api2)
+
+    const api = `https://www.zipcodeapi.com/rest/NoPzgbEGbMfKF0CGk07ggG52lXZ8t2NNfS2DMHMEYfdOfHEUxh8UzGH0JKqO01ZM/city-zips.json/Charlotte/NC`
+    const api3 = `https://www.zipcodeapi.com/rest/YQ2EQV4TW3r1dF3h4FtX13kVLyr4ffcfRisIf1bOLqjxdjD2pWiWcCmrZtU8axF3/city-zips.json/Charlotte/NC`
+
+    
+    fetch(api3, {meathod: 'GET'})
     .then(data => {
         console.log(data)
     })
 
 })
 
-
-
-// sdf.addEventListener('click', () => {
+geoLocateButton.addEventListener('click', () => {
     
-//     let lat, long
+    let lat, long
 
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(position => {
-//             lat = position.coords.latitude;
-//             long = position.coords.longitude;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
 
-//             const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=554b954c4498dd6dcea9fa6a913c29b3`
+            const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=554b954c4498dd6dcea9fa6a913c29b3`
 
-//             fetch(api)
-//             .then(response => {
-//                 response.json();
-//             })
-//             .then(data => {
-//                 console.log(data)
-//             })
+            console.log(api)
+            fetch(api)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                console.log(data)
+            })
 
-//         })
-//     }
-// })
+        })
+    }
+})
 
