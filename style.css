@@ -115,6 +115,8 @@ button {
 .currently {
     width: 100%;
     justify-content: space-around;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .pane-one {
@@ -133,7 +135,7 @@ button {
 
 #current-location, #current-time-header,
 #current-condition {
-    margin: auto;
+    margin: 0;
 }
 
 .pane-two {
@@ -174,3 +176,45 @@ button {
 .fa-cloud-showers-heavy {
     color: rgb(155, 155, 155);
 }
+
+
+/* CSS Literally just for buttons */
+
+/* Push */
+@-webkit-keyframes hvr-push {
+    50% {
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+  @keyframes hvr-push {
+    50% {
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+  .hvr-push {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+  .hvr-push:before, .hvr-push:focus, .hvr-push:active {
+    -webkit-animation-name: hvr-push;
+    animation-name: hvr-push;
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+  }

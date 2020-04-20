@@ -137,8 +137,17 @@ zipButton.addEventListener('click', () => {
             
 
         })
+        .catch(data => {
+            console.log('Sorry, somthing went wrong.', data)
+        })
 
     })
+    .catch(data => {
+        alert('Sorry, somthing went wrong. Try putting a valid Zip')
+        console.log('Sorry, somthing went wrong.', data)
+    })
+
+    zip.value = '';
   
 })
   
@@ -157,10 +166,87 @@ cityStateButton.addEventListener('click', () => {
         return response.json()
     })
     .then(data => {
-        console.log(data.zip_codes[0])
+
+        let input = data.zip_codes[0];
+
+    const api = `https://api.openweathermap.org/data/2.5/weather?zip=${input}&appid=554b954c4498dd6dcea9fa6a913c29b3`
+
+    //fetch weather data from api
+    fetch(api)
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        console.log(data)
+        //Change city, condition and temps for current
+        currently.textContent = degreesKtoF(data.main.temp) + '°F' ;
+        feelsLike.textContent = degreesKtoF(data.main.feels_like) + '°F';
+        currentCondition.textContent = data.weather[0].description
+        currentLocation.textContent = data.name;
+        currentConditionIcon.className = weatherIconsComparison[data.weather[0].main]
+        humidity.textContent = data.main.humidity + '%'
+
+        let lat = data.coord.lat
+        let long = data.coord.lon
+
+        const api3Day = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=554b954c4498dd6dcea9fa6a913c29b3`
+
+        fetch(api3Day)
+        .then(response =>{
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+
+            let timeZone = data.timezone
+
+            //Time from timezone and add days
+            currentTime.textContent = ( moment().tz(timeZone).format('dddd') + ', ' + moment().tz(timeZone).format('hh:mm a') )
+            day2day.textContent = moment().tz(timeZone).add(1, 'd').format('dddd')
+            day3day.textContent = moment().tz(timeZone).add(2, 'd').format('dddd')
+            day4day.textContent = moment().tz(timeZone).add(3, 'd').format('dddd')
+
+
+            //Change temps for forecast
+            day2HightTemp.textContent = degreesKtoF(data.daily[1].temp.max) + '°F';
+            day2LowTemp.textContent = degreesKtoF(data.daily[1].temp.min) + '°F';
+            day3HighTemp.textContent = degreesKtoF(data.daily[2].temp.max) + '°F';
+            day3LowTemp.textContent = degreesKtoF(data.daily[2].temp.min) + '°F';
+            day4HighTemp.textContent = degreesKtoF(data.daily[3].temp.max) + '°F';
+            day4LowTemp.textContent = degreesKtoF(data.daily[3].temp.min) + '°F';
+    
+            //display the condition for each day
+            day2Condition.textContent = data.daily[1].weather[0].description
+            day3Condition.textContent = data.daily[2].weather[0].description
+            day4Condition.textContent = data.daily[3].weather[0].description
+
+            //Change icons for the different weather
+            day2ConditionIcon.className = weatherIconsComparison[data.daily[1].weather[0].main]
+            day3ConditionIcon.className = weatherIconsComparison[data.daily[2].weather[0].main]
+            day4ConditionIcon.className = weatherIconsComparison[data.daily[3].weather[0].main]
+            
+
+            })
+            .catch(data => {
+                console.log('Sorry, somthing went wrong.', data)
+            })
+
+        })
+    })
+    .catch(data => {
+        alert('Sorry, something went wrong. Please enter a vaild City & State.')
+        console.log('Sorry, somthing went wrong.', data)
     })
 
+
+    city.value = '';
+    state.value = '';
+
+
 })
+
+
+
 
 geoLocateButton.addEventListener('click', () => {
     
@@ -168,6 +254,7 @@ geoLocateButton.addEventListener('click', () => {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
+            
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
@@ -180,9 +267,49 @@ geoLocateButton.addEventListener('click', () => {
             })
             .then(data => {
                 console.log(data)
+
+            let timeZone = data.timezone
+
+            //Set current condition data
+            currently.textContent = degreesKtoF(data.current.temp) + '°F' ;
+            feelsLike.textContent = degreesKtoF(data.current.feels_like) + '°F';
+            currentCondition.textContent = data.current.weather[0].description;
+            currentLocation.textContent = (`lat: ${lat.toFixed(2)}°,lon: ${long.toFixed(2)}°`);
+            currentConditionIcon.className = weatherIconsComparison[data.current.weather[0].main]
+            humidity.textContent = data.current.humidity + '%'
+
+            //Time from timezone and add days
+            currentTime.textContent = ( moment().tz(timeZone).format('dddd') + ', ' + moment().tz(timeZone).format('hh:mm a') )
+            day2day.textContent = moment().tz(timeZone).add(1, 'd').format('dddd')
+            day3day.textContent = moment().tz(timeZone).add(2, 'd').format('dddd')
+            day4day.textContent = moment().tz(timeZone).add(3, 'd').format('dddd')
+
+            //Change temps for forecast
+            day2HightTemp.textContent = degreesKtoF(data.daily[1].temp.max) + '°F';
+            day2LowTemp.textContent = degreesKtoF(data.daily[1].temp.min) + '°F';
+            day3HighTemp.textContent = degreesKtoF(data.daily[2].temp.max) + '°F';
+            day3LowTemp.textContent = degreesKtoF(data.daily[2].temp.min) + '°F';
+            day4HighTemp.textContent = degreesKtoF(data.daily[3].temp.max) + '°F';
+            day4LowTemp.textContent = degreesKtoF(data.daily[3].temp.min) + '°F';
+    
+            //display the condition for each day
+            day2Condition.textContent = data.daily[1].weather[0].description
+            day3Condition.textContent = data.daily[2].weather[0].description
+            day4Condition.textContent = data.daily[3].weather[0].description
+
+            //Change icons for the different weather
+            day2ConditionIcon.className = weatherIconsComparison[data.daily[1].weather[0].main]
+            day3ConditionIcon.className = weatherIconsComparison[data.daily[2].weather[0].main]
+            day4ConditionIcon.className = weatherIconsComparison[data.daily[3].weather[0].main]
+            
+            })
+            .catch(data => {
+                alert('Sorry something went wrong. Please enable location services on your browser.')
+                console.log('Sorry, somthing went wrong.', data)
             })
 
         })
     }
+
 })
 
