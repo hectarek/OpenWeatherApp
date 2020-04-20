@@ -84,14 +84,14 @@ button {
 /* Containers for general divs */
 
 .weather-by-zip {
-    background-color: rgb(135, 206, 250, .4);
+    background-color: rgb(135, 206, 250, .3);
     border-radius: 15px;
     width: 33%;
     height: 200px;
 }
 
 .weather-by-city {
-    background-color: rgb(135, 206, 250, .4);
+    background-color: rgb(135, 206, 250, .3);
     border-radius: 15px;
     width: 33%;
     height: 200px;
@@ -105,14 +105,14 @@ button {
 }
 
 .weather-by-location {
-    background-color: rgb(135, 206, 250, .4);
+    background-color: rgb(135, 206, 250, .3);
     border-radius: 15px;
     width: 33%;
     height: 200px;
 }
 
 .weather-container {
-    background-color: rgb(135, 206, 250, .4);
+    background-color: rgb(135, 206, 250, .3);
     border-radius: 15px;
     margin: 0px;
 }
@@ -178,7 +178,7 @@ button {
 }
 
 .fa-cloud-showers-heavy {
-    color: rgb(155, 155, 155);
+    color: rgb(133, 133, 133);
 }
 
 
