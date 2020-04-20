@@ -43,6 +43,10 @@ button {
     color: whitesmoke;
 }
 
+.weather-container {
+    visibility: hidden;
+}
+
 .weather-by-zip,
 .weather-by-city,
 .weather-by-location,

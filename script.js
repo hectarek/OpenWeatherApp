@@ -10,6 +10,9 @@ function degreesKtoC(num) {
 
 //HTML Elements
 
+//Weather container
+let weatherContainer = document.querySelector('.weather-container');
+
 //Buttons
 const zipButton = document.getElementById('zipButton');
 const cityStateButton = document.getElementById('cityStateButton')
@@ -135,6 +138,8 @@ zipButton.addEventListener('click', () => {
             day3ConditionIcon.className = weatherIconsComparison[data.daily[2].weather[0].main]
             day4ConditionIcon.className = weatherIconsComparison[data.daily[3].weather[0].main]
             
+            //Show weather Container 
+            weatherContainer.style.visibility = 'visible';
 
         })
         .catch(data => {
@@ -225,6 +230,8 @@ cityStateButton.addEventListener('click', () => {
             day3ConditionIcon.className = weatherIconsComparison[data.daily[2].weather[0].main]
             day4ConditionIcon.className = weatherIconsComparison[data.daily[3].weather[0].main]
             
+            //Show weather Container 
+             weatherContainer.style.visibility = 'visible';
 
             })
             .catch(data => {
@@ -301,6 +308,9 @@ geoLocateButton.addEventListener('click', () => {
             day2ConditionIcon.className = weatherIconsComparison[data.daily[1].weather[0].main]
             day3ConditionIcon.className = weatherIconsComparison[data.daily[2].weather[0].main]
             day4ConditionIcon.className = weatherIconsComparison[data.daily[3].weather[0].main]
+            
+            //Show weather Container 
+            weatherContainer.style.visibility = 'visible';
             
             })
             .catch(data => {
